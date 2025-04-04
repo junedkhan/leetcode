@@ -16,8 +16,6 @@ var findDuplicate = function(paths) {
         }
     })
 
-    const result = [];
-
     return Object.values(map).filter((item) => {
         return item.length > 1;
     });
