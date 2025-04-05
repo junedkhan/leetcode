@@ -11,37 +11,12 @@
  * @return {number}
  */
 
- const traverse = (node, side) => {
-    if(!node.left && !node.right && side === "right") {
-        return 0;
-    }
+ var sumOfLeftLeaves = function(root) {
+    return findVal(root, 1);
+};
 
-    if(node.val && !node.left && !node.right && side === "left") {
-        return node.val;
-    }
-
-    let sum = 0;
-
-    if(node.left) {
-        sum += traverse(node.left, "left")
-    };
-    if(node.right) {
-        sum += traverse(node.right, "right");
-    };
-
-    return sum;
- }
-
-var sumOfLeftLeaves = function(root) {
-    let sum = 0;
-
-    if(root.left) {
-        sum+= traverse(root.left, "left");
-    }
-
-    if(root.right) {
-        sum+=traverse(root.right, "right");
-    }
-
-    return sum;
+var findVal = (root, flag) => {
+    if (!root) return 0;
+    if (flag === 0 && !root.right && !root.left) return root.val;
+    return findVal(root.left, 0) + findVal(root.right, 1);
 };
