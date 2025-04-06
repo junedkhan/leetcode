@@ -10,7 +10,6 @@ var minimumOperationsToMakeKPeriodic = function(word, k) {
 
     for(let i = 0; i < word.length; i+=k) {
         const subStr = word.slice(i, i + k);
-        console.log("subStr", subStr)
         if(map.get(subStr)) {
             let val = map.get(subStr);
             map.set(subStr, ++val)
@@ -21,8 +20,5 @@ var minimumOperationsToMakeKPeriodic = function(word, k) {
         maxOcc = Math.max(maxOcc, map.get(subStr))
         total += 1;
     }
-
-    console.log("map", map)
-
     return total - maxOcc;
 };
