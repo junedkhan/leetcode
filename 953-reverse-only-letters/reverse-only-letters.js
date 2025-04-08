@@ -4,9 +4,7 @@
  */
 
 const isAlphabaticChar = (c) => {
-    const charCode = c.charCodeAt(0);
-    console.log("charCode", c, charCode);
-    return  (charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122);
+    return  /[a-zA-Z]/.test(c);
 }
 var reverseOnlyLetters = function(s) {
     let start = 0;
