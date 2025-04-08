@@ -3,9 +3,7 @@
  * @return {string}
  */
 
-const isAlphabaticChar = (c) => {
-    return  /[a-zA-Z]/.test(c);
-}
+
 var reverseOnlyLetters = function(s) {
     let result = s.split(""); // Split the string into an array of characters for in-place modification
   let left = 0; // Left pointer, starting at the beginning of the array
@@ -13,12 +11,12 @@ var reverseOnlyLetters = function(s) {
 
   while (left < right) { // Loop until the left and right pointers cross paths
     // Skip non-letter characters from the left
-    while (left < right && !isAlphabaticChar(result[left])) {
+    while (left < right && !/[a-zA-Z]/.test(result[left])) {
       left++;
     }
 
     // Skip non-letter characters from the right
-    while (left < right && !isAlphabaticChar(result[right])) {
+    while (left < right && !/[a-zA-Z]/.test(result[right])) {
       right--;
     }
 
