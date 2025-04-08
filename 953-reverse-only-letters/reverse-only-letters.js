@@ -14,11 +14,9 @@ var reverseOnlyLetters = function(s) {
     const arr = s.split("");
 
     while(start <= end) {
+        // if character ==> swap
         if(isAlphabaticChar(arr[start]) && isAlphabaticChar(arr[end])) {
-            const temp = arr[end]
-            arr[end] = arr[start]
-            arr[start] = temp;
-
+            [arr[start], arr[end]] = [arr[end], arr[start]];
             start++;
             end--;
         } else {
