@@ -13,12 +13,12 @@ var reverseOnlyLetters = function(s) {
 
   while (left < right) { // Loop until the left and right pointers cross paths
     // Skip non-letter characters from the left
-    while (left < right && !/[a-zA-Z]/.test(result[left])) {
+    while (left < right && !isAlphabaticChar(result[left])) {
       left++;
     }
 
     // Skip non-letter characters from the right
-    while (left < right && !/[a-zA-Z]/.test(result[right])) {
+    while (left < right && !isAlphabaticChar(result[right])) {
       right--;
     }
 
