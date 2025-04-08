@@ -13,18 +13,19 @@ var reverseOnlyLetters = function(s) {
 
     while(start <= end) {
         // if character ==> swap
+
         if(isAlphabaticChar(arr[start]) && isAlphabaticChar(arr[end])) {
             [arr[start], arr[end]] = [arr[end], arr[start]];
             start++;
             end--;
-        } else {
-            if(!isAlphabaticChar(arr[start])) {
-                start++;
-            }
+        }
 
-            if(!isAlphabaticChar(arr[end])) {
+        if(!isAlphabaticChar(arr[start])) {
+                start++;
+        }
+
+        if(!isAlphabaticChar(arr[end])) {
                 end--;
-            }
         }
     }  
 
