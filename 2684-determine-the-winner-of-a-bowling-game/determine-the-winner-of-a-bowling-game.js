@@ -17,9 +17,6 @@ var isWinner = function(player1, player2) {
     let player1Sum = player1.reduce(helperSum, 0);
     let player2Sum = player2.reduce(helperSum, 0);
 
-    console.log("player1Sum", player1Sum)
-    console.log("player2Sum", player2Sum)
-
     if(player1Sum > player2Sum) {
         return 1;
     }
