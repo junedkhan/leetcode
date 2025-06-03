@@ -5,6 +5,7 @@
 var majorityElement = function(nums) {
     const map = {};
     let maxOcc = 0;
+    let maxNum = Math.floor(nums.length/2)
 
     nums.forEach((num) => {
         if(map[num] === undefined) {
@@ -12,7 +13,7 @@ var majorityElement = function(nums) {
         }
         map[num] += 1;
 
-        if(map[num] > Math.floor(nums.length/2)) {
+        if(map[num] > maxNum) {
             maxOcc = num;
         }
     });
