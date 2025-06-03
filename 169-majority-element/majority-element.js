@@ -8,7 +8,8 @@ var majorityElement = function(nums) {
     let maxNum = Math.floor(nums.length/2)
 
 
-    for(let num of nums) {
+    for(let i = 0; i < nums.length; i++) {
+        const num = nums[i];
         if(map[num] === undefined) {
             map[num] = 0;
         }
