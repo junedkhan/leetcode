@@ -7,15 +7,15 @@ var majorityElement = function(nums) {
     let maxOcc = 0;
     let maxNum = Math.floor(nums.length/2)
 
-    nums.forEach((num) => {
+
+    for(let num of nums) {
         if(map[num] === undefined) {
             map[num] = 0;
         }
         map[num] += 1;
 
         if(map[num] > maxNum) {
-            maxOcc = num;
+            return num;
         }
-    });
-    return maxOcc;
+    }
 };
