@@ -11,5 +11,22 @@
  * @return {_Node}
  */
 var cloneGraph = function(node) {
-    return structuredClone(node)
+    if(!node) return null;
+
+    const map = new Map();
+
+    const dfs = (node) => {
+        if (map.has(node.val)) return map.get(node.val);
+
+        const newNode = new _Node(node.val);
+        map.set(node.val, newNode);
+
+        for (const neighbor of node.neighbors) {
+            newNode.neighbors.push(dfs(neighbor));
+        }
+
+        return newNode;
+    }
+
+    return dfs(node)
 };
