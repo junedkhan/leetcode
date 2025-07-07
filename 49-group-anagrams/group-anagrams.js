@@ -4,17 +4,23 @@
  */
 var groupAnagrams = function(strs) {
     const map = new Map();
-    const ans = [];
 
-    strs.forEach((str) => {
-        const sortedStr = str.split("").sort().join("");
-        if(map.has(sortedStr)) {
-            ans[map.get(sortedStr)].push(str);
-        } else {
-            map.set(sortedStr, ans.length);
-            ans.push([str]);
+    for (const str of strs) {
+        // Create a frequency array of size 26
+        const count = new Array(26).fill(0);
+        for (const char of str) {
+            count[char.charCodeAt(0) - 97]++;
         }
-    })
 
-    return ans;
+        // Use the count array as a string key
+        const key = count.join('#'); // '#' to avoid ambiguity
+
+        if (!map.has(key)) {
+            map.set(key, []);
+        }
+
+        map.get(key).push(str);
+    }
+
+    return Array.from(map.values());
 };
