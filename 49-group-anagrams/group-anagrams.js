@@ -3,24 +3,44 @@
  * @return {string[][]}
  */
 var groupAnagrams = function(strs) {
-    const primes = [
-        2, 3, 5, 7, 11, 13, 17, 19, 23, 29,
-        31, 37, 41, 43, 47, 53, 59, 61, 67,
-        71, 73, 79, 83, 89, 97, 101
-    ];
-
+    const primes = generateFirstNPrimes(26); // for 'a' to 'z'
     const map = new Map();
 
     for (const str of strs) {
-        let hash = 1;
+        let hash = 1n; // use BigInt to avoid overflow
+
         for (const char of str) {
-            hash *= primes[char.charCodeAt(0) - 97];
+            hash *= BigInt(primes[char.charCodeAt(0) - 97]);
         }
 
-        if (!map.has(hash)) map.set(hash, []);
-        map.get(hash).push(str);
+        const key = hash.toString(); // map keys must be string or primitive
+
+        if (!map.has(key)) {
+            map.set(key, []);
+        }
+
+        map.get(key).push(str);
     }
 
-    return Array.from(map.values());
+    return [...map.values()];
 };
+
+function generateFirstNPrimes(n) {
+    const primes = [];
+    let num = 2;
+
+    while (primes.length < n) {
+        let isPrime = true;
+        for (let i = 2; i * i <= num; i++) {
+            if (num % i === 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        if (isPrime) primes.push(num);
+        num++;
+    }
+
+    return primes;
+}
 
