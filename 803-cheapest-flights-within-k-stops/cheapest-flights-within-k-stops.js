@@ -7,41 +7,35 @@
  * @return {number}
  */
 var findCheapestPrice = function(n, flights, src, dst, k) {
- // Step 1: Build adjacency list
+ /// Build adjacency list
   const graph = Array.from({ length: n }, () => []);
   for (const [from, to, price] of flights) {
     graph[from].push([to, price]);
   }
 
-  // Step 2: Init queue: [city, totalCost, stopsSoFar]
-  const queue = [[src, 0, 0]];
-  // Min cost to reach each city with certain stops
-  const minCost = Array(n).fill(Infinity);
-  minCost[src] = 0;
+  // Min-heap: [totalCost, city, stopsUsed]
+  const heap = [[0, src, 0]];
 
-  let answer = -1;
+  // Track cheapest price to (city, stops) combination
+  const visited = Array.from({ length: n }, () => Array(k + 2).fill(Infinity));
+  visited[src][0] = 0;
 
-  while (queue.length > 0) {
-    const [city, cost, stops] = queue.shift();
+  while (heap.length) {
+    // Always pick the minimum cost state
+    heap.sort((a, b) => a[0] - b[0]);
+    const [cost, city, stops] = heap.shift();
 
-    // If destination reached, update answer
-    if (city === dst) {
-      if (answer === -1 || cost < answer) answer = cost;
-      continue;
-    }
-
-    // If stops limit exceeded, skip
+    if (city === dst) return cost;
     if (stops > k) continue;
 
-    // Explore neighbors
     for (const [nei, price] of graph[city]) {
       const newCost = cost + price;
-      // Only push if cheaper than previous found for that city at this point
-      if (newCost < minCost[nei]) {
-        minCost[nei] = newCost;
-        queue.push([nei, newCost, stops + 1]);
+      // Only process if this path is cheaper than previous for (nei, stops+1)
+      if (newCost < visited[nei][stops + 1]) {
+        visited[nei][stops + 1] = newCost;
+        heap.push([newCost, nei, stops + 1]);
       }
     }
   }
-  return answer;
+  return -1;
 };
